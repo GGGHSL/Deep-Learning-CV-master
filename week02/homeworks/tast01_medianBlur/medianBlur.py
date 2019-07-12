@@ -1,10 +1,14 @@
 import numpy as np
-import cv2
-import os
-from matplotlib import pyplot as plt
 
 
-class medianBlur():
+def medianBlur(img, radius, padding_way):
+    if isinstance(img, list):
+        img = np.array(img, dtype=np.uint8)
+    MB = MedianBlur(image=img, r=radius, padding_way=padding_way)
+    MB.get_median_image()
+    return MB.median_blur_image
+
+class MedianBlur():
     """
     Median Blurring in O(1) Runtime Complexity.
     """
@@ -144,35 +148,3 @@ class medianBlur():
                 median = val
                 break
         return median
-
-
-def median_blur_func(img, r, padding_way):
-  MB = medianBlur(image=img, r=r, padding_way=padding_way)
-  MB.get_median_image()
-  return MB.median_blur_image
-
-
-if __name__ == '__main__':
-    image = np.random.randint(low=0, high=255, size=(7, 11)).astype(np.uint8)
-    print(image)
-    padding_ways = ["REPLICA", "ZERO"]
-    padding_way = np.random.choice(padding_ways, 1)
-    print(padding_way)
-    r = 1
-    median_image = median_blur_func(image, r, padding_way)
-    print(median_image)
-
-    image_address = '20190712182540.jpg'
-    image = cv2.imread(image_address)
-    img = cv2.resize(image, dsize=(int(image.shape[1] / 2), int(image.shape[0] / 2)))
-    H, W, C = img.shape
-    B, G, R = cv2.split(img)
-    # Radius: r = 3
-    # kernel size = 2 * r + 1 = 7
-    r = 3
-    padding_way = "REPLICA"
-    bgr_3 = list(map(lambda _: median_blur_func(_, r, padding_way),
-                     [B, G, R]))
-    mb_img_3 = cv2.merge(bgr_3)
-    plt.imshow(cv2.cvtColor(mb_img_3, cv2.COLOR_BGR2RGB))
-    # plt.show()
