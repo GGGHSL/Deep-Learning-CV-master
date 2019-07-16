@@ -10,14 +10,14 @@
 >* Perspective Transformation
 
 ## Week 02 | CV Fundamental II
-### 1.Image Processing (Low Level)
+### 1. Image Processing (Low Level)
 >**Image Convolution:**
 >* First-order & Second-order Derivative
 >* Gaussian Kernel
 >* Image Sharpen: Laplacian Operator
 >* Edge Detection: Sober Operator
 >* Image Blurring: Median & Gaussian
-### 2.Feature Point (Mid Level)
+### 2. Feature Point (Mid Level)
 **(1) What is Feature Point?**  
 
 **(2) What is a good Feature Point?**
@@ -44,7 +44,10 @@
 >* Orientation assignment
 >* Key-point descriptor
 
+### 3. Classical CV Procedure (High Level)
 >**Image Stitching**
+
+>**Image Classification (Bow / ML)**
 
 ## Week 03 | ML Fundamental I
 > Coming soon...
