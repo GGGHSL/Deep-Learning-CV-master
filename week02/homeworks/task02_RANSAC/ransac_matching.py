@@ -1,5 +1,4 @@
 import numpy as np
-import math
 
 
 def ransacMatching(A, B, METHOD = 2):
