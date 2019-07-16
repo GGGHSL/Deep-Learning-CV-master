@@ -60,7 +60,7 @@ The target of RANSAC is to find out the true matching within this messy.
 
 Algorithm for this procedure can be described like this:
 1. Choose 4 pair of points randomly in our matching points. Those four called "inlier" (中文： 内点) while
- others "outlier" (中文： 外点)
+   others "outlier" (中文： 外点)
 2. Get the homography of the inliers
 3. Use this computed homography to test all the other outliers. And separated them by using a threshold
  into two parts:
