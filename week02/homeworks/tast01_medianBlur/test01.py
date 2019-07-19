@@ -3,6 +3,8 @@ import cv2
 from matplotlib import pyplot as plt
 sys.path.append('../task01_medianBlur')
 from medianBlur import *
+import warnings
+warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
     image = np.random.randint(low=0, high=255, size=(7, 11)).astype(np.uint8)
@@ -27,4 +29,4 @@ if __name__ == '__main__':
                      [B, G, R]))
     mb_img_3 = cv2.merge(bgr_3)
     plt.imshow(cv2.cvtColor(mb_img_3, cv2.COLOR_BGR2RGB))
-    # plt.show()
+    plt.show()
