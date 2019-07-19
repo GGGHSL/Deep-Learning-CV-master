@@ -1,6 +1,9 @@
 import numpy as np
 import torch
+import random
+import cv2
 from torch.autograd import Variable
+from matplotlib import pylab as plt
 
 
 def ransacMatching(A, B):
@@ -27,16 +30,16 @@ def ransacMatching(A, B):
     p = 0.95  # probability having at least picked one set of inliers after iterations
     S = 4  # minimum number of data points required to estimate model parameters
     E = 0.5  # probability that a point is an inlier
-    K = 72  # maximum number of iterations allowed in the algorithm
+    MAX_ITERS = 1000  # maximum number of iterations allowed in the algorithm
     N = len(A)
     sigma = torch.FloatTensor([get_distance(p1, p2) for p1, p2 in zip(A, B)]).std()
-    T = torch.sqrt(5.99) * sigma
+    T = np.sqrt(5.99) * sigma
     dtype = torch.FloatTensor  # torch.float32
     LR = 1e-2
     MOMENTUM = 0.9
 
     # (0) Normalization：
-    A, B = get_normalized(A, B)  # torch.FloatTensor
+    A, B = get_normalized(A, B)  # -> torch.FloatTensor
 
     # (1) Choose 'S' pair of points randomly in matching points:
     inliers = np.random.choice(range(N), size=S, replace=False).tolist()
@@ -45,12 +48,13 @@ def ransacMatching(A, B):
 
     # (2) Initialize the homography 'H' & loss:
     H = Variable(get_init_H(src, dst), requires_grad=True)
-    optimizer = torch.optim.SGD(params=H, lr=LR, momentum=MOMENTUM)
+    optimizer = torch.optim.SGD([{'params': H}, ],
+                                lr=LR, momentum=MOMENTUM)
 
     """ RANSAC Iterations: """
-    for i in range(K):
+    for i in range(MAX_ITERS):
         optimizer.zero_grad()
-        loss = torch.FloatTensor([0])
+        loss = H.sum() * 0
         H_invs = H.inverse()  # TODO: Singular matrix?
         for p1, p2 in zip(src, dst):
             f2 = get_perspective(p1, H)
@@ -81,9 +85,9 @@ def ransacMatching(A, B):
             # (5) If there's no changes or we have already repeated step (2)-(4) K times, jump out of the recursion.
             # The final homography matrix 'H' will be the wanted one.
             break
-        loss.backup()
+        loss.backward()
         optimizer.step()
-    return H.numpy()
+    return H.detach().numpy()
 
 
 def get_distance(p1, p2):
@@ -99,26 +103,26 @@ def get_normalized(P1, P2):
         P1 = torch.FloatTensor(P1)
     if isinstance(P2, list):
         P2 = torch.FloatTensor(P2)
-    n = P1.shape[0]
     # 1.中心化
     p1_c, p2_c = P1.mean(dim=0), P2.mean(dim=0)
     P1 -= p1_c
     P2 -= p2_c
     # 2.归一化
-    D1, D2 = [], []
-    for p1, p2 in zip(P1, P2):
-        D1.append(get_distance(p1, p1_c))
-        D2.append(get_distance(p2, p2_c))
-    d1 = max(D1)  # -> tensor
-    d2 = max(D2)
-    P1 /= d1
-    P2 /= d2
+    # D1, D2 = [], []
+    # for p1, p2 in zip(P1, P2):
+    #     D1.append(get_distance(p1, p1_c))
+    #     D2.append(get_distance(p2, p2_c))
+    # d1 = max(D1)  # -> tensor
+    # d2 = max(D2)
+    # P1 /= d1
+    # P2 /= d2
     return P1, P2
 
 def get_perspective(p, H):
     x, y = p
-    src = torch.FloatTensor([x, y, 1]).reshape(3,)
-    u, v, w = H.mv(src)
+    src = torch.FloatTensor([x, y, 1]).reshape(3, 1)
+    # u, v, w = H.mm(src)
+    u, v, w = torch.mm(H, src)
     dst = torch.FloatTensor([u/w, v/w])
     return dst
 
@@ -140,5 +144,80 @@ def get_init_H(src, dst):
         else:
             a = torch.cat((a, ai), 0)
             b = torch.cat((b, bi), 0)
-    H = torch.FloatTensor(np.linalg.solve(a, b))
+    H = np.linalg.solve(a, b)
+    H = torch.FloatTensor(np.append(H, 1).reshape(3, 3))
     return H
+
+
+if __name__ == '__main__':
+    img = plt.imread("20180723165602.jpg")
+    h, w, c = img.shape
+
+    def random_warp(img):
+        height, width, channels = img.shape
+        random_margin = 60
+        # src
+        x1, y1 = random.randint(-random_margin, random_margin), random.randint(-random_margin, random_margin)
+        x2, y2 = random.randint(width - random_margin - 1, width - 1), random.randint(-random_margin, random_margin)
+        x3, y3 = random.randint(width - random_margin - 1, width - 1), random.randint(height - random_margin - 1,
+                                                                                      height - 1)
+        x4, y4 = random.randint(-random_margin, random_margin), random.randint(height - random_margin - 1, height - 1)
+        # dst
+        dx1 = random.randint(-random_margin, random_margin)
+        dy1 = random.randint(-random_margin, random_margin)
+        dx2 = random.randint(width - random_margin - 1, width - 1)
+        dy2 = random.randint(-random_margin, random_margin)
+        dx3 = random.randint(width - random_margin - 1, width - 1)
+        dy3 = random.randint(height - random_margin - 1, height - 1)
+        dx4 = random.randint(-random_margin, random_margin)
+        dy4 = random.randint(height - random_margin - 1, height - 1)
+        # warp:
+        pts1 = np.float32([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
+        pts2 = np.float32([[dx1, dy1], [dx2, dy2], [dx3, dy3], [dx4, dy4]])
+        M_warp = cv2.getPerspectiveTransform(src=pts1, dst=pts2)
+        img_warp = cv2.warpPerspective(src=img, M=M_warp, dsize=(width, height))
+        return M_warp, img_warp
+    cv2_img = cv2.imread("20180723165602.jpg")
+    H, cv2_img_warp = random_warp(cv2_img)
+    img_warp = cv2.cvtColor(cv2_img_warp, cv2.COLOR_BGR2RGB)
+    print(H)
+    A = []
+    B = []
+    for i in range(15):
+        x = random.randint(0, w - 1) * 1.
+        y = random.randint(0, h - 1) * 1.
+        A.append([x, y])
+        src = np.array([x, y, 1]).reshape(3, )
+        u, v, t = H.dot(src)
+        B.append([u / t, v / t])
+
+    H_hat = ransacMatching(A, B)
+    print(H_hat)
+
+    B_hat = []
+    for p in A:
+        x, y = p
+        src = np.array([x, y, 1]).reshape(3, 1)
+        u, v, t = H_hat.dot(src).ravel()
+        B_hat.append([u / t, v / t])
+    print('B:', B)
+    print('B_hat:', B_hat)
+    plt.subplot(131)
+    plt.title("original")
+    for p in A:
+        x, y = p
+        plt.scatter(x, y, c='r')
+    plt.imshow(img)
+    plt.subplot(132)
+    for p in B:
+        u, v = p
+        plt.scatter(u, v, c='g')
+    plt.title("perspective transform")
+    plt.imshow(img_warp)
+    plt.subplot(133)
+    for p in B_hat:
+        u, v = p
+        plt.scatter(u, v, c='b')
+    plt.title("estimate perspective transform")
+    plt.imshow(img_warp)
+    plt.show()
