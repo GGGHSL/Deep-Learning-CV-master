@@ -2,7 +2,7 @@
 >用于提交“深度学习与计算机视觉”课程的作业。
 
 >💗友情出镜💗: [**@暖暖-Nikki**](https://weibo.com/u/6775494073?is_all=1)  
-![@暖暖-Nikki](https://wx4.sinaimg.cn/mw690/007oxhwtgy1g1t1yc3q1nj31dq0rse82.jpg)
+![@暖暖-Nikki](https://wx4.sinaimg.cn/mw690/007oxhwtgy1g1t1yc3q1nj31dq0rse82.jpg "Nikki日常")
 
 ## Week 01 | CV Fundamental I
 ### Image Processing (Low Level)
