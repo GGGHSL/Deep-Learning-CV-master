@@ -2,13 +2,13 @@
 
 ### Task 1. Finish 2D Median Filtering.  
 * Source code:
->"~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/medianBlur.py"
+>"~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/python/medianBlur.py"
 
 * See coding logic:
->"~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/medianBlur.ipynb"
+>"~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/python/medianBlur.ipynb"
 
 * Run test case:
->$cd ~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur
+>$cd ~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/python
 
 >$python -W ignore test01.py
 
