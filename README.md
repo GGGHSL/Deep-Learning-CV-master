@@ -1,7 +1,7 @@
 # Deep-Learning-CV
 >用于提交“深度学习与计算机视觉”课程的作业。
 
->友情出镜: **@暖暖-Nikki**
+>💗友情出镜💗: [**@暖暖-Nikki**](https://weibo.com/u/6775494073?is_all=1)
 
 ## Week 01 | CV Fundamental I
 ### Image Processing (Low Level)
