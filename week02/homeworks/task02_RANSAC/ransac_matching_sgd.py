@@ -39,7 +39,9 @@ def ransacMatching(A, B):
     MOMENTUM = 0.9
 
     # (0) Normalization：
-    A, B = get_normalized(A, B)  # -> torch.FloatTensor
+    # A, B = get_normalized(A, B)  # -> torch.FloatTensor
+    A = torch.FloatTensor(A)
+    B = torch.FloatTensor(B)
 
     # (1) Choose 'S' pair of points randomly in matching points:
     inliers = np.random.choice(range(N), size=S, replace=False).tolist()
@@ -75,6 +77,7 @@ def ransacMatching(A, B):
             if d2 <= T and d1 <= T:
                 new_inliers.append(_)
                 loss += (d1 + d2)
+        print(len(new_inliers))
 
         if len(new_inliers) > 0:
             # (4) Get all inliers (new inliers + old inliers) and goto step (2)

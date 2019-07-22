@@ -33,6 +33,7 @@ for p in A:
     B_hat.append([u / t, v / t])
 print('B:', B)
 print('B_hat:', B_hat)
+
 plt.subplot(131)
 plt.title("original")
 for p in A:
