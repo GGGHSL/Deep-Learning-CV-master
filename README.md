@@ -49,6 +49,7 @@
 
 ### 3. Classical CV Procedure (High Level)
 >**Image Stitching**
+[Project01 | Image Stitching](https://github.com/GGGHSL/Deep-Learning-CV-master/tree/master/Project01-Image-Stitching): Updated
 
 >**Image Classification (Bow / ML)**
 
