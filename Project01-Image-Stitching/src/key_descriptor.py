@@ -16,6 +16,7 @@ class SIFT:
             key = cv2.waitKey()
             if key == 27:
                 cv2.destroyAllWindows()
+            cv2.imwrite(image_name, img_kp)
         # descriptor归一化
         sum = np.sum(des, axis=0)
         des /= sum
