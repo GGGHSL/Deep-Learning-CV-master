@@ -10,7 +10,7 @@
 ### 2. Estimate the homography matrix of matched keypoints
 (1) Get coordinates of matched keypoints  
 [key_descriptor.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/Project01-Image-Stitching/src/key_descriptor.py): 
-find matched keypoints where the correlation matrix of descriptors is greater than a threshold   
+find matched keypoints where the correlation matrix of descriptors is greater than a threshold.   
 Draw lines between matched keypoints:  
 `sift.draw_spindle(img1, img2, p1, p2, lwd=2, draw_samples=50)`  
 ![Matching Spindle](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/Project01-Image-Stitching/result/Nikki_garden_match_sample50.jpg?raw=true)
