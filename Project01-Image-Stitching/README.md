@@ -1,5 +1,5 @@
 # Project 01 | Image Stitching
----
+
 ### 1. Find keypoints and descriptors in each image
 [key_descriptor.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/Project01-Image-Stitching/src/key_descriptor.py): SIFT  
 `from key_descriptor import SIFT `  
