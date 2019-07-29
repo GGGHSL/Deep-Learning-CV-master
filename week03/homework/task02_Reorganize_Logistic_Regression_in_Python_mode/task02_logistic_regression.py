@@ -76,12 +76,15 @@ def main():
     y_hat = classify(h, 0.5)
 
     plt.figure()
-    plt.scatter(X[np.argwhere(y == 1), 0], X[np.argwhere(y == 1), 1], c='r', alpha='0.5')
-    plt.scatter(X[np.argwhere(y == 0), 0], X[np.argwhere(y == 0), 1], c='g', alpha='0.5')
+    plt.scatter(X[np.argwhere(y == 1), 0], X[np.argwhere(y == 1), 1],
+                c='r', alpha='0.5', label="y = 1")
+    plt.scatter(X[np.argwhere(y == 0), 0], X[np.argwhere(y == 0), 1],
+                c='g', alpha='0.5', label="y = 0")
     plt.scatter(X[np.argwhere(y_hat == 1), 0], X[np.argwhere(y_hat == 1), 1],
-                c='r', marker='x')
+                c='r', marker='x', label="y_hat = 1")
     plt.scatter(X[np.argwhere(y_hat == 0), 0], X[np.argwhere(y_hat == 0), 1],
-                c='g', marker='x')
+                c='g', marker='x', label="y_hat = 0")
+    plt.legend()
     plt.savefig("./classification_result.jpg", dpi=1000)
     plt.show()
 
