@@ -3,6 +3,7 @@ from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 import warnings
 
+
 def inference(x, theta):
     if x.ndim == 1:
         x.reshape(1, len(x))
