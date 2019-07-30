@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from seaborn import xkcd_rgb
-import cv2
 import copy
+import os
 
 
 def generate_center(df, k, seed=None):
@@ -66,6 +66,10 @@ def update(df, centroids):
 
 def main(k=3, seed=None):
     """ K-Means++ Main function """
+    save_path = "./result/example_{}_classes".format(k)
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
+
     # step 0: generate source data
     df = pd.DataFrame({
         'x': [12, 20, 28, 18, 10, 29, 33, 24, 45, 45, 52, 51, 52, 55, 53, 55, 61, 64, 69, 72, 23],
@@ -84,9 +88,10 @@ def main(k=3, seed=None):
         plt.scatter(*centroids[i], color=colmap[i], linewidths=6)
     plt.xlim(0, 80)
     plt.ylim(0, 80)
-    plt.savefig("./result/origin.jpg")
+    plt.savefig(save_path + "/origin.jpg")
 
     for i in range(10):
+        plt.close()
         # closest_centroids = df['closest'].copy(deep=True)
         closest_centroids = copy.deepcopy(df['closest'])
         print(id(closest_centroids))
@@ -98,7 +103,7 @@ def main(k=3, seed=None):
             plt.scatter(*centroids[k], color=colmap[k], linewidths=6)
         plt.xlim(0, 80)
         plt.ylim(0, 80)
-        plt.savefig("./result/{}.jpg".format(i))
+        plt.savefig(save_path + "/{}.jpg".format(i))
 
         df = assignment(df, centroids, colmap)
 
@@ -107,4 +112,4 @@ def main(k=3, seed=None):
 
 
 if __name__ == '__main__':
-    main()
+    main(k=4)
