@@ -40,5 +40,5 @@ if __name__ == '__main__':
     plt.subplot(224)
     plt.title('kernel size = 7')
     plt.imshow(cv2.cvtColor(mb_img_7, cv2.COLOR_BGR2RGB))
-    plt.savefig(save_path+"/medianBlur_kernels.jpg")
+    plt.savefig(save_path+"/medianBlur_kernels.jpg", dpi=1000)
     plt.show()
