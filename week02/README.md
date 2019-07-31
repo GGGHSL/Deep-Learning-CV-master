@@ -8,8 +8,10 @@
 
 * Run test case:
 [test01.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/test01.py)  
-`$cd ~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/python`  
-`$python -W ignore test01.py`  
+```bash
+cd ~/Deep-Learning-CV-master/week02/homeworks/task01_medianBlur/python
+python -W ignore test01.py
+```
 ![median blurring with different kernel size](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/result/medianBlur_kernels.jpg?raw=true, "median blurring with different kernel size")
 
 ### Task 2.  Using RANSAC Algorithm to Estimate the Homography Matrix of Perspective Transformation.
@@ -21,8 +23,10 @@
 
 * Run test case:
 [test02.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/task02_RANSAC/test02.py)  
-`$cd ~/Deep-Learning-CV-master/week02/homeworks/task02_RANSAC`  
-`$python -W ignore test02.py`  
+```bash
+cd ~/Deep-Learning-CV-master/week02/homeworks/task02_RANSAC
+python -W ignore test02.py
+```
 ![RANSAC matching](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/task02_RANSAC/result/ransac_example.png?raw=true)
 
 
