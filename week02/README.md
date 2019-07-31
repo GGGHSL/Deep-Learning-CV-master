@@ -24,3 +24,7 @@
 `$cd ~/Deep-Learning-CV-master/week02/homeworks/task02_RANSAC`  
 `$python -W ignore test02.py`  
 ![RANSAC matching](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/task02_RANSAC/result/ransac_example.png?raw=true)
+
+
+### Task 3. Image Stitching
+See [Project01 | Image Stitching](https://github.com/GGGHSL/Deep-Learning-CV-master/tree/master/Project01-Image-Stitching)
