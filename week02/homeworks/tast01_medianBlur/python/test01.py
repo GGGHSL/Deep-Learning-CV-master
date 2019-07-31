@@ -23,10 +23,26 @@ if __name__ == '__main__':
     B, G, R = cv2.split(img)
     # Radius: r = 3
     # kernel size = 2 * r + 1 = 7
-    r = 3
     padding_way = "REPLICA"
-    bgr_3 = list(map(lambda _: medianBlur(_, r, padding_way),
-                     [B, G, R]))
+    r = 3
+    bgr_3 = list(map(lambda _: medianBlur(_, r, padding_way), [B, G, R]))
     mb_img_3 = cv2.merge(bgr_3)
+
+    mb_img_5 = cv2.merge(list(map(lambda _: medianBlur(_, 5, padding_way), [B, G, R])))
+    mb_img_7 = cv2.merge(list(map(lambda _: medianBlur(_, 7, padding_way), [B, G, R])))
+
+    plt.figure(figsize=(15, 10))
+    plt.subplot(221)
+    plt.title('original')
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.subplot(222)
+    plt.title('kernel size = 3')
     plt.imshow(cv2.cvtColor(mb_img_3, cv2.COLOR_BGR2RGB))
+    plt.subplot(223)
+    plt.title('kernel size = 5')
+    plt.imshow(cv2.cvtColor(mb_img_5, cv2.COLOR_BGR2RGB))
+    plt.subplot(224)
+    plt.title('kernel size = 7')
+    plt.imshow(cv2.cvtColor(mb_img_7, cv2.COLOR_BGR2RGB))
+    plt.savefig("./result/medianBlur_kernels.jpg")
     plt.show()
