@@ -1,6 +1,6 @@
 # Project 01 | Image Stitching
 
-## Run testcase:
+## Run testcase: [test.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/Project01-Image-Stitching/test.py)
 ```bash
 cd ~/Deep-Learning-CV-master/Project01-Image-Stitching
 python test.py
