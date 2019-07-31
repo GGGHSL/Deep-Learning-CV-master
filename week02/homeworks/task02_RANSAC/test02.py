@@ -52,4 +52,5 @@ for p in B_hat:
     plt.scatter(u, v, c='b')
 plt.title("estimate perspective transform")
 plt.imshow(img_warp)
+plt.savefig("./result/ransac_example.jpg", dpi=1000)
 plt.show()
