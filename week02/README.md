@@ -1,11 +1,9 @@
 # Week 02 | Coding Homework: 
 
 ### Task 1. Finish 2D Median Filtering.  
-* Source code:  
-[medianBlur.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/medianBlur.py)
+* Source code: [medianBlur.py](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/medianBlur.py)
 
-* See coding logic:  
-[medianBlur.ipynb](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/medianBlur.ipynb)
+* See coding logic: [medianBlur.ipynb](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/python/medianBlur.ipynb)
 ![explain algorithm](https://github.com/GGGHSL/Deep-Learning-CV-master/blob/master/week02/homeworks/tast01_medianBlur/CTMF.JPG?raw=true)
 
 * Run test case:
