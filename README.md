@@ -54,4 +54,28 @@
 >**Image Classification (Bow / ML)**
 
 ## Week 03 | ML Fundamental I
-> Coming soon...
+>* Introduction To Machine Learning  
+>* Classical Supervised Learning  
+>   * Linear Regression & Logistic Regression
+>       * SGD
+>       * Zigzag?
+
+## Week 04 | ML Fundamental II
+>* Classical Supervised Learning
+>   * Neural Network
+>   * Back Propagation
+>   * Regularization
+
+## Week 05 | ML Fundamental III
+>* Classical Supervised Learning
+>   * SVM
+>       * Linear SVM
+>       * Kernels
+
+>* Classical Unsupervised Learning
+>   * K-Means & K-Means++
+
+>* Concept & Problems
+>   * Under-fitted & Over-fitted
+>   * Bias & Variance
+>   * ...
